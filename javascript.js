@@ -43,18 +43,34 @@ const newPlayer = function (name, mark) {
     return ({getName, getMark})
 };
 
-Gameboard.fill();
+//Gameboard.fill();
 console.log(Gameboard.getBoard());
 // Gameboard.restart();
 // console.log(Gameboard.getBoard());
 
 const guiModule = (function () {
+    let playedIndex = 0;
+    const playerClick = function (event){
+        let mark = "";
+        if (!event.target.textContent){
+            if (playedIndex % 2 === 0){
+                mark = "O";
+            }
+            else
+            {
+                mark = "X";
+            };
+        playedIndex++;
+        event.target.textContent = mark;
+    };
+};
+
     const renderSquare = function (sqr, index){
-        //create a div for a square
         const newSquare = document.createElement("div");
         newSquare.setAttribute("class", "board-square");
         newSquare.setAttribute("id", `sqr-${index}`);
         newSquare.textContent = sqr;
+        newSquare.addEventListener("click", guiModule.playerClick);
         return newSquare;
     };
 
@@ -72,7 +88,7 @@ const guiModule = (function () {
         console.log("Hello");
     };
 
-    return ({renderNewBoard, updateBoard});
+    return ({renderNewBoard, updateBoard, playerClick});
 })();
 
 guiModule.renderNewBoard();

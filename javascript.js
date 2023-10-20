@@ -51,7 +51,7 @@ const Gameboard = (function () {
             }
         }
     };
-    return ({ getBoard, updateBoard, restart, fill, haveWinner})
+    return ({ getBoard, updateBoard, restart, fill, haveWinner});
 })();
 
 const newPlayer = function (name, mark) {
@@ -112,10 +112,10 @@ const guiModule = (function () {
     };
 
     const deleteBoard = function () {
-        let squares = document.querySelectorAll(".board-square");
+        let squares = container.querySelectorAll(".board-square");
         squares.forEach(element => {
             element.remove();
-        });
+        }); 
     };
 
     const stopGame = function () {
@@ -140,4 +140,6 @@ const guiModule = (function () {
     return ({renderNewBoard});
 })();
 
-guiModule.renderNewBoard();
+let startButton = document.querySelector(".board-square");
+startButton.addEventListener("click", guiModule.renderNewBoard);
+

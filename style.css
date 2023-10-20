@@ -13,6 +13,8 @@ body {
   display: grid;
   align-items: center;
   justify-items: center;
+  align-content: center;
+  gap: 1rem;
 }
 .board.container {
   background-color: burlywood;
@@ -35,4 +37,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.start-game {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  display: flex;
+  text-align: center;
 }

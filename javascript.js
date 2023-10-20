@@ -95,6 +95,10 @@ const guiModule = (function () {
             };
             playedIndex++;
 
+            if (playedIndex > 8) {
+                tiedGame();
+            };
+
             event.target.textContent = mark;
             let sqrUpdate = event.target.id.split("-")[1]
             Gameboard.updateBoard(sqrUpdate, mark);
@@ -141,6 +145,12 @@ const guiModule = (function () {
         });
     };
 
+    const tiedGame = function () {
+        stopGame();
+        won.textContent = "It's a tie!"
+        won.classList.toggle("visible");
+        btn.classList.toggle("visible");
+    };
 
     const renderSquare = function (sqr, index){
         const newSquare = document.createElement("div");

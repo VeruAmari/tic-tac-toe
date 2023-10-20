@@ -15,9 +15,9 @@ body {
   justify-items: center;
   align-content: center;
   gap: 1rem;
+  background-color: antiquewhite;
 }
 .board.container {
-  background-color: burlywood;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: -8px 8px 0px 0px rgb(177, 139, 103);
@@ -29,14 +29,17 @@ body {
   align-items: stretch;
   justify-items: stretch;
   font-size: 5rem;
+  background-image: linear-gradient(rgba(222, 184, 135, 0.692), rgba(222, 184, 135, 0.863)),
+  url(wood.jpg);
 }
 
 .board-square {
   box-sizing: border-box;
-  border: solid 1px #777;
+  border: solid 3px #534747;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #534747;
 }
 
 .start-game {
@@ -46,4 +49,47 @@ body {
   grid-row-end: 4;
   display: flex;
   text-align: center;
+}
+
+.players.container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  width: 35rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  gap: 2rem;
+  font-size: 2rem;
+}
+label {
+  display: grid;
+  grid-template: 1fr / 1fr 2fr;
+  align-items: center;
+}
+
+input[type=text] {
+  height: 2rem;
+  padding-left: 1ex;
+  border-radius: 7px;
+  font-size: 1rem;
+}
+
+.highlight {
+  background-color: rgb(235, 186, 82);
+}
+.visible {
+  visibility: hidden;
+}
+.display.winner,
+.restart.button{
+  position: absolute;
+  font-size: 5rem;
+  background-color: #534747;
+  color: beige;
+  border-radius: 15px;
+}
+.restart.button {
+  font-size: 3rem;
+  padding: 1rem;
+  margin-bottom: -35rem;
 }

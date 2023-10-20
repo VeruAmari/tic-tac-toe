@@ -68,39 +68,79 @@ const newPlayer = function (name, mark) {
 };
 
 //Gameboard.fill();
-console.log(Gameboard.getBoard());
+// console.log(Gameboard.getBoard());
 // Gameboard.restart();
 // console.log(Gameboard.getBoard());
 
 const guiModule = (function () {
     const container = document.querySelector(".board.container");
+    const play1 = document.querySelector("#player1");
+    const play2 = document.querySelector("#player2");
 
+    let Player1;
+    let Player2;
     // Temporary fix to keep track of current player
     let playedIndex = 0;
 
     const playerClick = function (event){
         let mark = "";
-        if (!event.target.textContent){
+        if (!event.target.textContent)
+        {
             if (playedIndex % 2 === 0){
-                mark = "O";
+                mark = Player1.getMark();
             }
             else
             {
-                mark = "X";
+                mark = Player2.getMark();
             };
-        playedIndex++;
-        
-        event.target.textContent = mark;
-        let sqrUpdate = event.target.id.split("-")[1]
-        Gameboard.updateBoard(sqrUpdate, mark);
-        console.log(Gameboard.getBoard());
-        let winner = Gameboard.haveWinner();
-        if (winner) {
-            console.log(winner.player + " wins! " + winner.squares);
-            stopGame();
-        }
+            playedIndex++;
+
+            event.target.textContent = mark;
+            let sqrUpdate = event.target.id.split("-")[1]
+            Gameboard.updateBoard(sqrUpdate, mark);
+            //console.log(Gameboard.getBoard());
+            let winner = Gameboard.haveWinner();
+            let player;
+
+            if (winner) {
+                if (winner.player === Player1.getMark()) {
+                    player = Player1.getName();
+                } else if (winner.player === Player2.getMark()) {
+                    player = Player2.getName();
+                };
+                console.log(player + " wins! " + winner.squares);
+                stopGame();
+                displayWinner(player, winner.squares);
+                playedIndex = 0;
+            };
+        };
+
     };
-};
+
+
+    // Handling displaying the winner
+    const btn = document.querySelector(".restart.button");
+    const won = document.querySelector(".display.winner");
+
+    const restartGame = function(){
+        won.classList.toggle("visible");
+        btn.classList.toggle("visible");
+        Gameboard.restart();
+        renderNewBoard();
+    };
+
+    btn.addEventListener("click", restartGame);
+
+    const displayWinner = function (winner, area){
+        won.textContent = winner + " wins!";
+        won.classList.toggle("visible");
+        btn.classList.toggle("visible");
+        // Highlight winning row
+        area.split("-").forEach((element)=>{
+            document.querySelector(`#sqr-${element}`).classList.toggle("highlight");;
+        });
+    };
+
 
     const renderSquare = function (sqr, index){
         const newSquare = document.createElement("div");
@@ -112,7 +152,7 @@ const guiModule = (function () {
     };
 
     const deleteBoard = function () {
-        let squares = container.querySelectorAll(".board-square");
+        const squares = container.querySelectorAll(".board-square");
         squares.forEach(element => {
             element.remove();
         }); 
@@ -128,7 +168,13 @@ const guiModule = (function () {
     const renderNewBoard = function (){
         if (document.querySelector(".board-square")) {
             deleteBoard();
-        }
+        };
+
+        Player1 = newPlayer(play1.value, "X");
+        Player2 = newPlayer(play2.value, "O");
+        play1.disabled = true;
+        play2.disabled = true;
+
         let i = 0;
         for (square of Gameboard.getBoard()) {
             const newSqr = renderSquare(square, i);
@@ -142,4 +188,3 @@ const guiModule = (function () {
 
 let startButton = document.querySelector(".board-square");
 startButton.addEventListener("click", guiModule.renderNewBoard);
-

@@ -6,3 +6,28 @@
 :root {
   --base-font-size: 1rem;
 }
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.board.container {
+  background-color: burlywood;
+  width: 50rem;
+  height: 50rem;
+
+  display: grid;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+  align-items: stretch;
+  justify-items: stretch;
+  font-size: 10rem;
+}
+
+.board-square {
+  border: solid 1px white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

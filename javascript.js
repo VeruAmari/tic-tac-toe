@@ -1,5 +1,5 @@
 const Gameboard = (function () {
-    const board = ["", "", "", "", "", "", "", "", ""];
+    let board = ["", "", "", "", "", "", "", "", ""];
 
     const getBoard = function () {
         console.log("Fetching board status");
@@ -13,12 +13,21 @@ const Gameboard = (function () {
 
     const restart = function () {
         console.log("Restarting match.");
-        for (square in board) {
-            square = "";
+        for (let i = 0; i < board.length; i++) {
+            board[i] = "";
         }
     };
 
-    return ({ getBoard, updateBoard, restart })
+    const fill = function () {
+        for (let i = 0; i < board.length; i++) {
+            if (i % 2 === 0) {
+                board[i] = "X";
+            } else {
+                board[i] = "O";
+            }
+        }
+    };
+    return ({ getBoard, updateBoard, restart, fill,})
 })();
 
 const newPlayer = function (name, mark) {
@@ -32,4 +41,38 @@ const newPlayer = function (name, mark) {
         return playerMark
     };
     return ({getName, getMark})
-}
+};
+
+Gameboard.fill();
+console.log(Gameboard.getBoard());
+// Gameboard.restart();
+// console.log(Gameboard.getBoard());
+
+const guiModule = (function () {
+    const renderSquare = function (sqr, index){
+        //create a div for a square
+        const newSquare = document.createElement("div");
+        newSquare.setAttribute("class", "board-square");
+        newSquare.setAttribute("id", `sqr-${index}`);
+        newSquare.textContent = sqr;
+        return newSquare;
+    };
+
+    const renderNewBoard = function (){
+        const container = document.querySelector(".board.container");
+        let i = 0;
+        for (square of Gameboard.getBoard()) {
+            const newSqr = renderSquare(square, i);
+            container.appendChild(newSqr);
+            i++;
+        };
+    };
+
+    const updateBoard = function(sqr) {
+        console.log("Hello");
+    };
+
+    return ({renderNewBoard, updateBoard});
+})();
+
+guiModule.renderNewBoard();

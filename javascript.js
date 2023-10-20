@@ -49,7 +49,9 @@ console.log(Gameboard.getBoard());
 // console.log(Gameboard.getBoard());
 
 const guiModule = (function () {
+
     let playedIndex = 0;
+
     const playerClick = function (event){
         let mark = "";
         if (!event.target.textContent){
@@ -70,7 +72,7 @@ const guiModule = (function () {
         newSquare.setAttribute("class", "board-square");
         newSquare.setAttribute("id", `sqr-${index}`);
         newSquare.textContent = sqr;
-        newSquare.addEventListener("click", guiModule.playerClick);
+        newSquare.addEventListener("click", playerClick);
         return newSquare;
     };
 
@@ -88,7 +90,7 @@ const guiModule = (function () {
         console.log("Hello");
     };
 
-    return ({renderNewBoard, updateBoard, playerClick});
+    return ({renderNewBoard});
 })();
 
 guiModule.renderNewBoard();

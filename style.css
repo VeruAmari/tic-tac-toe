@@ -1,5 +1,6 @@
 :root {
   --base-font-size: 1rem;
+  --responsive-font-size: min(30vw, 3.5rem);
   --dark-color: #4d333d;
   --light-color: beige;
   --gradient-1: rgba(255, 211, 211, 0.884);
@@ -36,7 +37,7 @@ body {
   grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
   align-items: stretch;
   justify-items: stretch;
-  font-size: 5rem;
+  font-size: var(--responsive-font-size);
   background-image: linear-gradient(var(--gradient-1), var(--gradient-2)),
   url(wood.jpg);
   background-size: cover;
@@ -44,7 +45,7 @@ body {
 
 .board-square {
   box-sizing: border-box;
-  border: solid 3px var(--dark-color);
+  border: solid 2px var(--dark-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,7 +96,7 @@ input[type=text] {
 .display.winner,
 .restart.button{
   position: absolute;
-  font-size: 3rem;
+  font-size: var(--responsive-font-size);
   padding: 2rem;
   background-color: var(--dark-color);
   color: var(--light-color);
@@ -105,7 +106,6 @@ input[type=text] {
   margin-top: -35vmin;
 }
 .restart.button {
-  font-size: 3rem;
   padding: 1rem;
   margin-bottom: -35vmin;
 }

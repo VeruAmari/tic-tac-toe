@@ -95,11 +95,6 @@ const guiModule = (function () {
             };
             playedIndex++;
 
-            if (playedIndex > 8) {
-                playedIndex = 0;
-                tiedGame();
-            };
-
             event.target.textContent = mark;
             let sqrUpdate = event.target.id.split("-")[1]
             Gameboard.updateBoard(sqrUpdate, mark);
@@ -117,6 +112,14 @@ const guiModule = (function () {
                 stopGame();
                 displayWinner(player, winner.squares);
                 playedIndex = 0;
+                return;
+            };
+
+            if (playedIndex > 8) {
+                if (!(Gameboard.haveWinner())){
+                playedIndex = 0;
+                tiedGame();
+                };
             };
         };
 

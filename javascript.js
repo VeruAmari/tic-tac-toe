@@ -96,6 +96,7 @@ const guiModule = (function () {
             playedIndex++;
 
             if (playedIndex > 8) {
+                playerIndex = 0;
                 tiedGame();
             };
 
